@@ -1,0 +1,38 @@
+nav {
+  position: relative;
+  z-index: 1;
+  height: 120px;
+  width: 100%;
+  background-color: #4056a1;
+  font-size: 24px;
+  font-family: 'Source Sans Pro', sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.nav-tweet-msg-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffff;
+}
+
+#nav-app-name {
+  font-family: 'Bungee', sans-serif; 
+  font-size: 36px;
+  color: #ffff;
+  margin: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+#nav-tweet-msg {
+  margin: 1.5em;
+}
+
+#nav-double-arrow {
+  margin-top: -1.25em;
+  margin-bottom: 0.25em;
+}
