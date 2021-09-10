@@ -1,0 +1,25 @@
+header {
+  height: 400px;
+  width: 100%;
+  background-color: orange;
+  background-image: url("https://www.transparenttextures.com/patterns/txture.png");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#header-user-image {
+  margin-top: -2em;
+}
+
+#header-user-name {
+  margin: 0px;
+  font-size: 48px;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffff;
+}
+
+.notbold {
+  font-weight:normal
+}
