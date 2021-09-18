@@ -1,63 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Meta Information -->
-    <title>Tweeter - Home Page</title>
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<head>
+  <!-- Meta Information -->
+  <title>Tweeter - Home Page</title>
 
-    <!-- App CSS -->
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/new-tweets.css" type="text/css" />
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    type="text/css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" type="text/css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+    type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"
+    integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- External JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/new-tweets.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/tweet.css" type="text/css" />
 
-    <!-- App JS -->
-    <script type="text/javascript" src="/scripts/client.js"></script>
-    <script type="text/javascript" src="scripts/composer-char-counter.js"></script>
-  </head>
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  <body>
-    <!-- Top nav bar (fixed) -->
-    <nav>
-      <span id="nav-app-name">tweeter</span>
-      <div class="nav-tweet-msg-container">
-        <span id="nav-tweet-msg"><b>Write</b> a new Tweet</span>
-        <span id="nav-double-arrow"><i class="fas fa-angle-double-down" style="color: crimson;"></i></span>
-      </div>
-    </nav>
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/client.js"></script>
+  <script type="text/javascript" src="scripts/composer-char-counter.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#empty-error").hide();
+      $("#too-long-error").hide();
 
-    <header>
-      <div class="header-user-image-container">
-        <img id="header-user-image" src="/images/profile-hex.png">
-      </div>
-      <br>
-      <div class="header-user-name-container">
-        <h2 id="header-user-name">Your <span class='notbold'>Name</span></h2>
-      </div>
-    </header>
+      $(".nav-tweet-msg-container").on("click", function() {
+        if ($(".new-tweet").is(":hidden")){
+          return $(".new-tweet").slideDown(); 
+        }
+        $(".new-tweet").slideUp();
+      });
 
-    <!-- Page-specific (main) content here -->
-    <main class="container">
-      <section class="new-tweet">
-        <h2 id="new-tweet-text">Compose Tweet</h2>
-        <form action="/tweets" method="POST">
-          <div class="main-tweet-form">
+      $(function () {
+        $('#post-tweet').submit(function (event) {
+          const tweetValue = $(this).serializeArray()[0]['value'];
+          event.preventDefault()
+          if (!tweetValue) {
+            $("#empty-error").slideDown();
+            return;
+          } else if (tweetValue.length > 140) {
+            $("#too-long-error").slideDown();
+            return;
+          }
+          $.post("/tweets", $(this).serialize(), function () {
+            $("#empty-error").slideUp();
+            $("#too-long-error").slideUp();
+          });
+        });
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+
+  <!-- Top nav bar (fixed) -->
+  <nav>
+    <span id="nav-app-name">tweeter</span>
+    <div class="nav-tweet-msg-container">
+      <span id="nav-tweet-msg"><b>Write</b> a new Tweet</span>
+      <span id="nav-double-arrow"><i class="fas fa-angle-double-down" style="color: crimson;"></i></span>
+    </div>
+  </nav>
+
+  <header id="display-user">
+    <div class="image">
+      <img src="/images/profile-hex.png">
+    </div>
+    <br>
+    <div class="name">
+      <h2>Your <span class='notbold'>Name</span></h2>
+    </div>
+  </header>
+
+  <!-- Page-specific (main) content here -->
+  <main class="container">
+    <div id="empty-error">Your tweet is empty! Share your thoughts :)</div>
+    <div id="too-long-error">Umm sorry your over our 140 character limit, shorten it down a bit :)</div>
+    <section class="new-tweet">
+      <form id="post-tweet" action="/tweets" method="POST">
+        <div class="main-tweet-form">
           <textarea placeholder="What are you humming about?" name="text" id="tweet-text"></textarea>
-          </div>
-          <div class="tweet-button-counter">
-            <button class="button" type="submit">Tweet</button>
-            <output name="counter" class="counter" for="tweet-text">140</output>
-          </div>
-        </form>
-      </section>
-    </main>
-  </body>
+        </div>
+        <div class="tweet-button-counter">
+          <button type="submit">Tweet</button>
+          <output name="counter" class="counter" for="tweet-text">140</output>
+        </div>
+      </form>
+    </section>
+    <div class="tweet-container"></div>
+  </main>
+</body>
+
 </html>
