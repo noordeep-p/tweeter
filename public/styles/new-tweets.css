@@ -1,3 +1,8 @@
+section.new-tweet {
+  width: 100%;
+  margin: 1em;
+}
+
 .tweet-button-counter {
   margin-top: 0.5em;
   display: flex;
@@ -35,4 +40,12 @@ button {
 #tweet-text ::placeholder {
   color: black;
   font-size: 1em;
+}
+
+#empty-error, #too-long-error {
+  margin: 1em;
+  padding: 10px;
+  border-width: 5px;
+  border-style: solid;
+  color: #f44336;
 }
