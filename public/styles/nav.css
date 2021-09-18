@@ -1,5 +1,6 @@
 nav {
-  position: relative;
+  position: fixed;
+  top: 0;
   z-index: 1;
   height: 120px;
   width: 100%;
@@ -13,6 +14,7 @@ nav {
 }
 
 .nav-tweet-msg-container {
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,4 +37,20 @@ nav {
 #nav-double-arrow {
   margin-top: -1.25em;
   margin-bottom: 0.25em;
+}
+
+.nav-tweet-msg-container:hover #nav-double-arrow {
+  animation: up-down 1s linear infinite;
+}
+
+@keyframes up-down {
+
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(50%);
+  }
+
 }
