@@ -4,7 +4,7 @@ $(document).ready(() => {
     if (e.target.value.length < 141) {
       $("div.tweet-button-counter").find(".counter")
         .html(e.target.value.length)
-        .css("color", "black");
+        .css("color", "#545149");
     }
     if (e.target.value.length > 140) {
       $("div.tweet-button-counter").find(".counter")
