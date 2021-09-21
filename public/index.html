@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <link rel="stylesheet" href="/styles/new-tweets.css" type="text/css" />
   <link rel="stylesheet" href="/styles/tweet.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
 
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -36,10 +37,31 @@
     $(document).ready(function () {
       $("#empty-error").hide();
       $("#too-long-error").hide();
+      $(".fa-stack").hide();
+
+
+
+      $(".fa-stack").on("click", function(){
+            $(window).scrollTop(0);
+            $(".new-tweet").slideDown();
+            $("#tweet-text").focus();
+          });
+
+      $(window).scroll(function() {
+        if ($(window).scrollTop() - $("header").height() > 0) {
+          $(".nav-tweet-msg-container").hide();
+          $(".fa-stack").show();
+        } else {
+          $(".fa-stack").hide();
+          $(".nav-tweet-msg-container").show();
+        };
+      });
 
       $(".nav-tweet-msg-container").on("click", function() {
         if ($(".new-tweet").is(":hidden")){
-          return $(".new-tweet").slideDown(); 
+          $(".new-tweet").slideDown(); 
+          $("#tweet-text").focus();
+          return;
         }
         $(".new-tweet").slideUp();
       });
@@ -104,6 +126,14 @@
     </section>
     <div class="tweet-container"></div>
   </main>
+
+  <footer class="scroll-up">
+    <span class="fa-stack" style="vertical-align: top;">
+      <i class="fas fa-circle fa-stack-2x"></i>
+      <i class="fas fa-chevron-up fa-stack-1x fa-inverse"></i>
+    </span>
+  </footer>
+
 </body>
 
 </html>
