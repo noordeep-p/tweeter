@@ -2,7 +2,7 @@
 
 Tweeter is a simple, single-page Twitter clone. Users can input their tweets at the top of the page into the tweet box and then the tweets are render onto the page with additional user info, such as the username, handle, timestamp and avatar. There are several dynamic alements build into the app such as character counter & cleint side code which renders error messages onto the page for empty and lenghty tweets. The app also has a responsive design with different page layout for mobile and desktop use (top 2 screenshots below are the desktop design, and bottom 2 are mobile).
 
-This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, JS, jQuery and AJAX front-end skills, and their Node, Express and MongoDB back-end skills.
+The goal of the project is to build upon and HTML, CSS, JS, jQuery and AJAX front-end skills, and Node, Express and MongoDB back-end skills.
 
 ## Screenshots
 
