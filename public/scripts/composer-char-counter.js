@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+
+// function used to dynamically update charactor counter on tweet box
 $(document).ready(() => {
   $("#tweet-text").on("input", function(e) {
     if (e.target.value.length < 141) {

@@ -7,6 +7,7 @@
 
 $(document).ready(() => {
 
+  // uses ajax to send post request to server and render the new tweet by prepending onto the tweet containter
   $('#post-tweet').submit(function() {
     const tweetData = $(this).serializeArray()[0];
     
@@ -20,6 +21,7 @@ $(document).ready(() => {
       });
   });
 
+  // escape function to prevent any code insertions by users by converting typed code into charactors
   const escape = function(str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
@@ -33,6 +35,7 @@ $(document).ready(() => {
       });
   };
 
+  // goes through tweet objects renders tweets onto the page
   const renderTweets = function(tweets) {
     for (tweet of tweets) {
       const $tweet = createTweetElement(tweet);
@@ -41,6 +44,7 @@ $(document).ready(() => {
     }
   };
 
+  // creates html template and uses literals to insert vars
   const createTweetElement = function(tweetData) {
     const username = tweetData['user'].name;
     const userHandle = tweetData['user'].handle;
