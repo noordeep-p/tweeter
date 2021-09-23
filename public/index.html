@@ -4,6 +4,7 @@
 <head>
   <!-- Meta Information -->
   <title>Tweeter - Home Page</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
   <!-- External CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -33,59 +34,7 @@
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/client.js"></script>
   <script type="text/javascript" src="scripts/composer-char-counter.js"></script>
-  <script>
-    $(document).ready(function () {
-      $("#empty-error").hide();
-      $("#too-long-error").hide();
-      $(".fa-stack").hide();
-
-
-
-      $(".fa-stack").on("click", function(){
-            $(window).scrollTop(0);
-            $(".new-tweet").slideDown();
-            $("#tweet-text").focus();
-          });
-
-      $(window).scroll(function() {
-        if ($(window).scrollTop() - $("header").height() > 0) {
-          $(".nav-tweet-msg-container").hide();
-          $(".fa-stack").show();
-        } else {
-          $(".fa-stack").hide();
-          $(".nav-tweet-msg-container").show();
-        };
-      });
-
-      $(".nav-tweet-msg-container").on("click", function() {
-        if ($(".new-tweet").is(":hidden")){
-          $(".new-tweet").slideDown(); 
-          $("#tweet-text").focus();
-          return;
-        }
-        $(".new-tweet").slideUp();
-      });
-
-      $(function () {
-        $('#post-tweet').submit(function (event) {
-          const tweetValue = $(this).serializeArray()[0]['value'];
-          event.preventDefault()
-          if (!tweetValue) {
-            $("#empty-error").slideDown();
-            return;
-          } else if (tweetValue.length > 140) {
-            $("#too-long-error").slideDown();
-            return;
-          }
-          $.post("/tweets", $(this).serialize(), function () {
-            $("#empty-error").slideUp();
-            $("#too-long-error").slideUp();
-          });
-        });
-      });
-    });
-
-  </script>
+  <script type="text/javascript" src="/scripts/events.js"></script>
 </head>
 
 <body>
@@ -99,13 +48,15 @@
     </div>
   </nav>
 
+<div class="tweetbox-tweets">
+  
   <header id="display-user">
     <div class="image">
       <img src="/images/profile-hex.png">
     </div>
     <br>
     <div class="name">
-      <h2>Your <span class='notbold'>Name</span></h2>
+      <h2>Beyoncé <span class='notbold'>Knowles</span></h2>
     </div>
   </header>
 
@@ -126,6 +77,8 @@
     </section>
     <div class="tweet-container"></div>
   </main>
+
+</div>
 
   <footer class="scroll-up">
     <span class="fa-stack" style="vertical-align: top;">
