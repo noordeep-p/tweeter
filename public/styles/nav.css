@@ -39,6 +39,10 @@ nav {
   margin-bottom: 0.25em;
 }
 
+.fas.fa-angle-double-down {
+  color: crimson;
+}
+
 .nav-tweet-msg-container #nav-double-arrow {
   animation: up-down 2s linear infinite;
 }
