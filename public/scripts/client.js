@@ -6,6 +6,7 @@
  */
 
 $(document).ready(() => {
+
   $('#post-tweet').submit(function() {
     const tweetData = $(this).serializeArray()[0];
     
@@ -14,6 +15,7 @@ $(document).ready(() => {
         if (tweetData.value.length > 0 && tweetData.value.length < 141) {
           const $tweet = createTweetElement(data[data.length - 1]);
           $('.tweet-container').prepend($tweet);
+          timeago.render(document.querySelectorAll(".time-stamp"));
         }
       });
   });
@@ -57,7 +59,7 @@ $(document).ready(() => {
             <div class="tweet-msg">${escape(userTweet)}</div>
           </header>
           <footer class="user-actions">
-            <div class="time-stamp">${escape(timeStamp)}</div>
+            <div datetime="${escape(timeStamp)}" class="time-stamp"></div>
             <div class="tweet-actions">
               <i class="fas fa-flag"></i>
               <i class="fas fa-retweet"></i>
