@@ -10,13 +10,13 @@ $(document).ready(() => {
   // uses ajax to send post request to server and render the new tweet by prepending onto the tweet containter
   $('#post-tweet').submit(function() {
     const tweetData = $(this).serializeArray()[0];
-    
     $.ajax("/tweets", { method: "GET" })
       .then(function(data) {
         if (tweetData.value.length > 0 && tweetData.value.length < 141) {
           const $tweet = createTweetElement(data[data.length - 1]);
           $('.tweet-container').prepend($tweet);
           timeago.render(document.querySelectorAll(".time-stamp"));
+          $("#tweet-text").val('');
         }
       });
   });
