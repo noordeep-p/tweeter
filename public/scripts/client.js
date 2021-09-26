@@ -17,6 +17,7 @@ $(document).ready(() => {
           $('.tweet-container').prepend($tweet);
           timeago.render(document.querySelectorAll(".time-stamp"));
           $("#tweet-text").val('');
+          $("div.tweet-button-counter").find(".counter").html(140);
         }
       });
   });
